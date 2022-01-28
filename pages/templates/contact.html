@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Star Wars Wallpapers | Contact Us{% endblock title %}
+
+{% block content %}
+  <section class="about-hero" style="background-image: url({% static 'pages/img/contact-us.png' %})">
+    <div class="about-text">
+      <h1>Want to contact with Force?</h1>
+      <h3>Simply fill out the form and submit it</h3>
+    </div>
+  </section>
+  <div class="alert-message">
+    <div>
+      {% if messages %}
+        {% for message in messages %}
+          {% if name %}
+            <h1>{{ name }}, thanks you very much for your message! We will contact you shortly!</h1>
+          {% else %}
+            <h1>Ooops, something went wrong!</h1>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  <div class="full-container-contact">
+    <div class="contact-container">
+      <div class="form-container">
+        <div class="input-form">
+          <h1>Drop us a line</h1>
+          <form action="{% url 'contact' %}" method="post">{% csrf_token %}
+            <input name="full_name" type="text" placeholder="Full Name">
+            <input name="email" type="email" placeholder="Email">
+            <input name="message" type="text" placeholder="Message">
+            <button class="submit-button" type="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="image-container">
+        <img src="{% static 'pages/img/clone-trooper.png' %}" alt="clone-trooper">
+      </div>
+    </div>
+    <div class="map-location">
+      <iframe
+          title="OULU University, Finland"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13460.206731322787!2d25.462001964444827!3d65.05772966614396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46802d0fee05afb3%3A0xe8963f6b08a1eba1!2sUniversity%20of%20Oulu!5e0!3m2!1sen!2s!4v1610022779839!5m2!1sen!2s"
+          frameBorder="0"
+          allowFullScreen=""
+          aria-hidden="false"
+          tabIndex="0"
+      ></iframe>
+    </div>
+  </div>
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+  <div class="home-intro">
+    <h1>HD, 4K Star Wars Wallpapers and Arts</h1>
+    <p>Search for your favorite Star Wars characters...</p>
+  </div>
+  <div class="categories-wrapper" id="scroll-bar-id" onscroll="handleScroll()" style="display: none">
+    <div class="arrow-shadow-left" id="arrow-left-id">
+      <img src="{% static 'pages/img/svg/arrow-left.svg' %}" alt="arrow-left" onclick="scrollBar('left')">
+    </div>
+    <button class="link-categories active-on">all</button>
+    {% for category in categories %}
+      <button class="link-categories">{{ category.title }}</button>
+    {% endfor %}
+    <div class="arrow-shadow-right" id="arrow-right-id">
+      <img src="{% static 'pages/img/svg/arrow-right.svg' %}" alt="arrow-right" onclick="scrollBar('right')">
+    </div>
+  </div>
+  <section class="wallpapers-container">
+    {% for wallpaper in page_obj %}
+      <div class="wallpaper-image-container">
+        <img src="{{ wallpaper.image_thumbnail.url }}" alt="{{ wallpaper.collection.title }}"
+             onclick="window.open('{{ wallpaper.image.url }}', '_blank')">
+        <a href="{{ wallpaper.image.url }}" download
+           title="{{ wallpaper.collection.title }}">
+          <i class="fas fa-arrow-down"></i>
+        </a>
+        <div onclick="window.open('{{ wallpaper.image.url }}', '_blank')">
+          <p class="title"
+             style="margin-bottom: 2rem; text-transform: capitalize">{{ wallpaper.collection.title }}</p>
+          <p style="display: none">{{ wallpaper.description }}</p>
+          <p class="title"><i class="far fa-eye"></i>&nbsp;&nbsp;{{ wallpaper.views }}</p>
+        </div>
+        <span onclick="window.open('{{ wallpaper.image.url }}', '_blank')"
+              class="title">{{ wallpaper.upload_time|date:"M d, Y" }}</span>
+        <div onclick="window.open('{{ wallpaper.image.url }}', '_blank')" class="overlay"></div>
+        <div onclick="window.open('{{ wallpaper.image.url }}', '_blank')" class="overlay-top"></div>
+      </div>
+    {% endfor %}
+  </section>
+  {% if page_obj.has_other_pages %}
+      <nav class="dento-pagination">
+        <ul class="pagination">
+          {% if users.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}">&laquo;</a>
+            </li>
+          {% endif %}
+          {% for i in page_obj.paginator.page_range %}
+            {% if page_obj.number == i %}
+              <li class="page-item active">
+                <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+              </li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+{% endblock content %}
+
+
