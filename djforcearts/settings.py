@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # local apps
     'forceartsapi',
-    'pages',
     # third party apps
     'rest_framework',
     'corsheaders',
