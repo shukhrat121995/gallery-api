@@ -1,0 +1,816 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "array",
+  "items": [
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "rank": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "image",
+        "rank"
+      ]
+    }
+  ]
+}
