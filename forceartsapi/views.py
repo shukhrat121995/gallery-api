@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.permissions import AllowAny
@@ -6,6 +6,7 @@ from django.db.models import Q
 from .models import Wallpaper, Category, ContactUs
 from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
 from rest_framework.response import Response
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def infinite_search(request):
@@ -77,10 +78,15 @@ class ContactUsView(generics.ListCreateAPIView):
 
 
 def increment_views(request, pk):
-    wallpaper = Wallpaper.objects.get(id=pk)
-    wallpaper.views += 1
-    wallpaper.save()
-    return HttpResponse('success', status=status.HTTP_200_OK)
+    if request.method == 'PUT':
+        try:
+            wallpaper = Wallpaper.objects.get(id=pk)
+            wallpaper.views += 1
+            wallpaper.save()
+            return JsonResponse(status=200, data={'status': 'true', 'message': 'success'})
+        except ObjectDoesNotExist:
+            return JsonResponse(status=404, data={'status': 'false', 'message': 'wallpaper with given id not found'})
+    return JsonResponse(status=405, data={'status': 'false', 'message': 'method not allowed'})
 
 
 def inc_dec_likes(request, pk, value):
