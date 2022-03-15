@@ -17,36 +17,6 @@
 /pages/__pycache__/
 /pages/migrations/__pycache__/
 
-#secret-key should not be submitted
-secret-key.txt
+.env
 
-#token should not be submitted
-token.txt
-
-#media folder should be ignored
 /media/
-
-# * * * react gitignore files * * *
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-/.pnp.js
-
-# testing
-/coverage
-
-# production
-#/build
-
-# misc
-/.DS_Store
-/.env.local
-/.env.development.local
-/.env.test.local
-/.env.production.local
-
-/npm-debug.log*
-/yarn-debug.log*
-/yarn-error.log*

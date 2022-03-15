@@ -15,6 +15,7 @@ django-imagekit = "*"
 django-taggit = "*"
 requests = "*"
 django-cleanup = "*"
+django-environ = "*"
 
 [requires]
 python_version = "3.9"
