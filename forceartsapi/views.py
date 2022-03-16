@@ -1,4 +1,5 @@
 from django.http import HttpResponse, JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework import generics
 from rest_framework import status
 from rest_framework.permissions import AllowAny
@@ -51,11 +52,6 @@ class CategoryView(generics.ListAPIView):
     serializer_class = CategorySerializer
 
 
-class CharactersView(generics.ListAPIView):
-    queryset = Category.objects.filter(rank__lte=30).order_by('rank')
-    serializer_class = CategorySerializer
-
-
 class ReactInfiniteSearchView(generics.ListAPIView):
     serializer_class = WallpaperSerializer
 
@@ -77,6 +73,7 @@ class ContactUsView(generics.ListCreateAPIView):
     serializer_class = ContactUsSerializer
 
 
+@csrf_exempt
 def increment_views(request, pk):
     if request.method == 'PUT':
         try:
@@ -89,6 +86,7 @@ def increment_views(request, pk):
     return JsonResponse(status=405, data={'status': 'false', 'message': 'method not allowed'})
 
 
+@csrf_exempt
 def inc_dec_likes(request, pk, value):
     wallpaper = Wallpaper.objects.get(id=pk)
     if value == 'increase':
