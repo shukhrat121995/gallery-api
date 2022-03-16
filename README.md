@@ -47,7 +47,7 @@ Available routes:
 
 1. http://127.0.0.1:8000/api/characters
 
-2. http://127.0.0.1:8000/api/search?format=api&limit=20&offset=0&query=&order=likes
+2. http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
 
 
 
