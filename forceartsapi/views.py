@@ -14,13 +14,14 @@ def infinite_search(request):
     limit = request.GET.get('limit')
     offset = request.GET.get('offset')
     query = request.GET.get('query')
-    order = request.GET.get('order', 'upload_time')  # only can by 'views' or 'upload_time', default is by upload_time
+    # only can by 'views' or 'upload_time', default is by upload_time
+    order = request.GET.get('order', 'upload_time')
     if query:
         return Wallpaper.objects.filter(
             Q(visibility=True) &
             (
-                    Q(tags__name__in=[str(query)]) |
-                    Q(collection__title=str(query).lower())
+                Q(tags__name__in=[str(query)]) |
+                Q(collection__title=str(query).lower())
             )
         ).distinct().order_by(f'-{str(order)}')[int(offset):int(offset) + int(limit)]
     else:
@@ -37,8 +38,8 @@ def is_there_more_data_search(request):
         return int(offset) + int(limit) < Wallpaper.objects.filter(
             Q(visibility=True) &
             (
-                    Q(tags__name__in=[str(query)]) |
-                    Q(collection__title=str(query).lower())
+                Q(tags__name__in=[str(query)]) |
+                Q(collection__title=str(query).lower())
             )
         ).distinct().count()
     else:
@@ -60,7 +61,9 @@ class ReactInfiniteSearchView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
-        serializer = self.serializer_class(queryset, many=True, context={"request": request})
+        serializer = self.serializer_class(
+            queryset, many=True, context={
+                "request": request})
         return Response({
             "images": serializer.data,
             "has_more": is_there_more_data_search(request)
@@ -80,10 +83,13 @@ def increment_views(request, pk):
             wallpaper = Wallpaper.objects.get(id=pk)
             wallpaper.views += 1
             wallpaper.save()
-            return JsonResponse(status=200, data={'status': 'true', 'message': 'success'})
+            return JsonResponse(
+                status=200, data={'status': 'true', 'message': 'success'})
         except ObjectDoesNotExist:
-            return JsonResponse(status=404, data={'status': 'false', 'message': 'wallpaper with given id not found'})
-    return JsonResponse(status=405, data={'status': 'false', 'message': 'method not allowed'})
+            return JsonResponse(status=404, data={
+                                'status': 'false', 'message': 'wallpaper with given id not found'})
+    return JsonResponse(
+        status=405, data={'status': 'false', 'message': 'method not allowed'})
 
 
 @csrf_exempt

@@ -53,7 +53,12 @@ class Wallpaper(models.Model):
 
     image = models.ImageField(
         upload_to=make_file_path,
-        validators=[FileExtensionValidator(allowed_extensions=['jpeg', 'png', 'jpg'])],
+        validators=[
+            FileExtensionValidator(
+                allowed_extensions=[
+                    'jpeg',
+                    'png',
+                    'jpg'])],
         null=True,
     )
 
@@ -64,7 +69,8 @@ class Wallpaper(models.Model):
                                      format='JPEG',
                                      options={'quality': 85})
 
-    upload_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    upload_time = models.DateTimeField(
+        auto_now_add=True, blank=True, null=True)
 
     views = models.IntegerField(editable=False, default=0, blank=True)
 
