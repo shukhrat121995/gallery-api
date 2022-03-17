@@ -11,6 +11,7 @@
 
 # Byte-compiled / optimized / DLL files
 /__pycache__/
+/forceartsapi/migrations/
 /forceartsapi/migrations/__pycache__/
 /djforcearts/__pycache__/
 /forceartsapi/__pycache__/
