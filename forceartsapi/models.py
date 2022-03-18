@@ -101,10 +101,11 @@ class Wallpaper(models.Model):
     views = models.IntegerField(editable=False, default=0, blank=True)
     likes = models.IntegerField(editable=False, default=0, blank=True)
 
-    def __str__(self):  # pylint: disable=E1101
+    def __str__(self):
         """
         Returns: string representation of a model
         """
+        # pylint: disable=E1101
         return str(self.collection.title)
 
 
