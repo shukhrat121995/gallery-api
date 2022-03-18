@@ -20,6 +20,7 @@ class WallpaperInline(admin.TabularInline):
         Returns:
             object:
         """
+        # pylint: disable=no-member
         queryset = super().get_queryset(request)
         ids = queryset.order_by('-id').values('pk')[:3]
         return Wallpaper.objects.filter(pk__in=ids).order_by('-id')
@@ -67,7 +68,8 @@ class WallpaperAdmin(admin.ModelAdmin):
         """
         return super().get_queryset(request).prefetch_related('tags')
 
-    def tag_list(self, obj: object) -> object:
+    @classmethod
+    def tag_list(cls, obj: object) -> object:
         """
         Args:
             obj:
