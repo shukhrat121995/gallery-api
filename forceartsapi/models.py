@@ -3,18 +3,17 @@ This module contains models for Category, Wallpaper and ContactUs tables class r
 There are several helper methods and classes such asa TitleField and make_file_path()
 """
 from django.db import models
-from django.core.validators import FileExtensionValidator
+from django.core.validators import FileExtensionValidator, MinValueValidator
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from taggit.managers import TaggableManager
-from django.core.validators import MinValueValidator
 
 
 class TitleField(models.CharField):
     """This class helps to convert Wallpaper's title to lowercase"""
 
     def __init__(self, *args, **kwargs):
-        super(TitleField, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def get_prep_value(self, value):
         """
@@ -29,10 +28,12 @@ class TitleField(models.CharField):
 class Category(models.Model):
     """Category class representation"""
 
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Sets plural and singular model name"""
         verbose_name = "Category"
         verbose_name_plural = "Categories"
+    # pylint: enable=too-few-public-methods
 
     title = TitleField(max_length=255, null=True, blank=False, unique=True)
     description = models.TextField(null=True, blank=False)
@@ -47,7 +48,7 @@ class Category(models.Model):
         """
         Returns: string representation of a model
         """
-        return self.title
+        return str(self.title)
 
 
 def make_file_path(instance, filename):
@@ -65,10 +66,12 @@ def make_file_path(instance, filename):
 class Wallpaper(models.Model):
     """Wallpaper class representation"""
 
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Sets plural and singular model name"""
         verbose_name = "Wallpaper"
         verbose_name_plural = "Wallpapers"
+    # pylint: enable=too-few-public-methods
 
     collection = models.ForeignKey(Category, on_delete=models.CASCADE)
     description = models.TextField(default=None, null=True)
@@ -101,15 +104,18 @@ class Wallpaper(models.Model):
         """
         Returns: string representation of a model
         """
-        return self.collection.title
+        return str(self.collection.title)
 
 
 class ContactUs(models.Model):
     """ContactUs class representation"""
+
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Sets plural and singular model name"""
         verbose_name = "Contact-Us"
         verbose_name_plural = "Contact-Us"
+    # pylint: enable=too-few-public-methods
 
     full_name = models.CharField(max_length=255, default=None, blank=True)
     email = models.EmailField(default=None, blank=True)
@@ -119,4 +125,4 @@ class ContactUs(models.Model):
         """
         Returns: string representation of a model
         """
-        return self.full_name
+        return str(self.full_name)
