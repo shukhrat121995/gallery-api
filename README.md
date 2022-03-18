@@ -27,9 +27,21 @@ urllib3==1.26.5
 ```
 
 ### Database
-Normally, you should not use sqlite database in production but for testing purposes it's more than enough. If you plan to move into production consider using PostgreSQL or other SQL type databases. All you have to do is edit database section settings.py file of the project. And don't forget to install pipenv install psycopg2 in order to be able to connect with PostgresSQL database.
+Normally, you should not use sqlite database in production but for testing purposes it's more than enough. If you plan 
+to move into production consider using PostgreSQL or other SQL type databases. All you have to do is edit database 
+section settings.py file of the project. And don't forget to install pipenv install psycopg2 in order to be able to 
+connect with PostgresSQL database.
 
-You can use ```starwarsarts``` tar file, as a dump database for testing purposes. You just need to create a database by using pgAdmin, and replace it with ```starwarsarts``` tar file that is located in the repository
+Instead of using PostgreSQL you can also use SQLite database. Please change ```settings.py``` of the project to use
+SQLite database
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
+    }
+}
+```
 
 ### Setup
 
@@ -40,15 +52,22 @@ cd gallery-api
 pipenv install
 pipenv sync
 pipenv shell
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver
 ```
 
-Available routes:
+### Endpoints:
+``` 
+1. [GET] http://127.0.0.1:8000/api/characters
+2. [GET] http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
+3. [POST] http://127.0.0.1:8000/api/user/create
+4. [POST] http://127.0.0.1:8000/api/user/auth
+5. [POST, PUT, DELETE] http://127.0.0.1:8000/api/wallpaper
+6. [GET] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/views
+7. [PATCH] http://127.0.0.1:8000/api/wallpaper/likes
 
-1. http://127.0.0.1:8000/api/characters
-
-2. http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
-
+```
 
 
 
