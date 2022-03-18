@@ -12,6 +12,7 @@ from taggit.managers import TaggableManager
 class TitleField(models.CharField):
     """This class helps to convert Wallpaper's title to lowercase"""
 
+    # pylint: disable=W0235
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -100,7 +101,7 @@ class Wallpaper(models.Model):
     views = models.IntegerField(editable=False, default=0, blank=True)
     likes = models.IntegerField(editable=False, default=0, blank=True)
 
-    def __str__(self):
+    def __str__(self):  # pylint: disable=E1101
         """
         Returns: string representation of a model
         """
