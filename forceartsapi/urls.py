@@ -1,3 +1,4 @@
+"""A list of urls of the app"""
 from django.urls import path
 from . import views
 
