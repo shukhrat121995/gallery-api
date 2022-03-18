@@ -1,10 +1,10 @@
 """Application views module"""
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework import generics, status
-from rest_framework.permissions import AllowAny
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from rest_framework import generics, status
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Wallpaper, Category, ContactUs
 from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
@@ -101,41 +101,47 @@ class ContactUsView(generics.ListCreateAPIView):
 
 
 @csrf_exempt
-def increment_views(request, pk):
+def increment_views(request, primary_key):
     """
     Args:
         request:
-        pk:
+        primary_key:
     Returns:
         response: JSON
     """
     if request.method == 'PATCH':
         try:
-            wallpaper = Wallpaper.objects.get(id=pk)
+            wallpaper = Wallpaper.objects.get(id=primary_key)
             wallpaper.views += 1
             wallpaper.save()
             return JsonResponse(
                 status=200, data={'status': 'true', 'message': 'success'})
         except ObjectDoesNotExist:
-            return JsonResponse(status=404, data={'status': 'false', 'message': 'wallpaper with given id not found'})
+            return JsonResponse(
+                status=404,
+                data={'status': 'false', 'message': 'wallpaper with given id not found'}
+            )
     return JsonResponse(
         status=405, data={'status': 'false', 'message': 'method not allowed'})
 
 
 @csrf_exempt
-def inc_dec_likes(request, pk, value):
+def inc_dec_likes(request, primary_key, value):
     """
     Args:
         request:
-        pk:
+        primary_key:
         value:
     Returns:
         response: JSON
     """
-    wallpaper = Wallpaper.objects.get(id=pk)
-    if value == 'increase':
-        wallpaper.likes += 1
-    elif value == 'decrease':
-        wallpaper.likes -= 1
-    wallpaper.save()
-    return HttpResponse('success', status=status.HTTP_200_OK)
+    if request.method == 'PATCH':
+        wallpaper = Wallpaper.objects.get(id=primary_key)
+        if value == 'increase':
+            wallpaper.likes += 1
+        elif value == 'decrease':
+            wallpaper.likes -= 1
+        wallpaper.save()
+        return HttpResponse('success', status=status.HTTP_200_OK)
+    return JsonResponse(
+        status=405, data={'status': 'false', 'message': 'method not allowed'})
