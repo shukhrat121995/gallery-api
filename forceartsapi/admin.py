@@ -3,8 +3,8 @@
 Contains category, wallpaper and contact
 """
 from django.contrib import admin
-from .models import Category, Wallpaper, ContactUs
 from imagekit.admin import AdminThumbnail
+from .models import Category, Wallpaper, ContactUs
 
 
 class WallpaperInline(admin.TabularInline):
@@ -20,10 +20,9 @@ class WallpaperInline(admin.TabularInline):
         Returns:
             object:
         """
-        queryset = super(WallpaperInline, self).get_queryset(request)
+        queryset = super().get_queryset(request)
         ids = queryset.order_by('-id').values('pk')[:3]
-        qs = Wallpaper.objects.filter(pk__in=ids).order_by('-id')
-        return qs
+        return Wallpaper.objects.filter(pk__in=ids).order_by('-id')
 
 
 @admin.register(Category)
@@ -75,7 +74,7 @@ class WallpaperAdmin(admin.ModelAdmin):
         Returns:
             object:
         """
-        return u", ".join(o.name for o in obj.tags.all())
+        return ", ".join(o.name for o in obj.tags.all())
 
     image_thumbnail = AdminThumbnail(image_field='image_thumbnail')
 
