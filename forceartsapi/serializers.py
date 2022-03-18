@@ -15,6 +15,7 @@ class WallpaperSerializer(serializers.ModelSerializer):
     image_thumbnail = serializers.ImageField()
     upload_time = serializers.DateTimeField(format="%d-%m-%Y")
 
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Wallpaper class representation"""
         model = Wallpaper
@@ -27,19 +28,24 @@ class WallpaperSerializer(serializers.ModelSerializer):
             'upload_time',
             'views',
             'likes']
+    # pylint: enable=too-few-public-methods
 
 
 class CategorySerializer(serializers.ModelSerializer):
     """This class contains category serializer"""
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Category class representation"""
         model = Category
         fields = ['id', 'title', 'description', 'image', 'rank']
+    # pylint: enable=too-few-public-methods
 
 
 class ContactUsSerializer(serializers.ModelSerializer):
     """This class contains contact serializer"""
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Contact class representation"""
         model = ContactUs
         fields = ['id', 'full_name', 'email', 'message']
+    # pylint: enable=too-few-public-methods
