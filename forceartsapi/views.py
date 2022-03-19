@@ -92,11 +92,18 @@ class ReactInfiniteSearchView(generics.ListAPIView):
         })
 
 
-class ContactUsView(generics.ListCreateAPIView):
+class ContactUsView(APIView):
     """ContactUS generic API view"""
     permission_classes = (AllowAny,)
-    queryset = ContactUs.objects.all()
     serializer_class = ContactUsSerializer
+
+    def post(self, request):
+        """Creates a new contact entity"""
+        serializer = ContactUsSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class WallpaperApiView(APIView):
