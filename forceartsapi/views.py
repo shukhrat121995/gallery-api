@@ -1,11 +1,10 @@
 """Application views module"""
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.db.models import Q
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from .generic import get_or_none
 from .models import Wallpaper, Category, ContactUs
 from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
 
@@ -105,9 +104,22 @@ class WallpaperApiView(APIView):
     permission_classes = (AllowAny,)
     serializer_class = WallpaperSerializer
 
+    def get_object(self, primary_key):
+        """Returns wallpaper object or raise an error"""
+        try:
+            return Wallpaper.objects.get(pk=primary_key)
+        except Wallpaper.DoesNotExist:
+            raise Http404
+
+    def get(self, request, primary_key):
+        """Returns a wallpaper's data"""
+        wallpaper_object = self.get_object(primary_key)
+        serializer = WallpaperSerializer(wallpaper_object)
+        return Response(serializer.data)
+
     def patch(self, request, primary_key):
         """Increments or decrements wallpaper's likes value"""
-        wallpaper_object = get_or_none(Wallpaper, pk=primary_key)
+        wallpaper_object = self.get_object(primary_key)
         options = ('inc-likes', 'dec-likes', 'inc-views')
         option = request.data.get('option', None)
 

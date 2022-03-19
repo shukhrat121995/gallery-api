@@ -59,7 +59,7 @@ python manage.py runserver
 
 ### Endpoints:
 ``` 
-1. [GET] http://127.0.0.1:8000/api/characters
+1. [GET] http://127.0.0.1:8000/api/category
 2. [GET] http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
 3. [POST] http://127.0.0.1:8000/api/user/create
 4. [POST] http://127.0.0.1:8000/api/user/auth
