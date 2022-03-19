@@ -1,9 +1,9 @@
 """Application views module"""
-from django.http import HttpResponse, JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse, Http404
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import generics, status
+from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Wallpaper, Category, ContactUs
@@ -26,8 +26,8 @@ def infinite_search(request):
         return Wallpaper.objects.filter(
             Q(visibility=True) &
             (
-                Q(tags__name__in=[str(query)]) |
-                Q(collection__title=str(query).lower())
+                    Q(tags__name__in=[str(query)]) |
+                    Q(collection__title=str(query).lower())
             )
         ).distinct().order_by(f'-{str(order)}')[int(offset):int(offset) + int(limit)]
     return Wallpaper.objects.filter(
@@ -50,8 +50,8 @@ def is_there_more_data_search(request):
         return int(offset) + int(limit) < Wallpaper.objects.filter(
             Q(visibility=True) &
             (
-                Q(tags__name__in=[str(query)]) |
-                Q(collection__title=str(query).lower())
+                    Q(tags__name__in=[str(query)]) |
+                    Q(collection__title=str(query).lower())
             )
         ).distinct().count()
     return int(offset) + int(limit) < Wallpaper.objects.filter(visibility=True).count()
@@ -100,48 +100,39 @@ class ContactUsView(generics.ListCreateAPIView):
     serializer_class = ContactUsSerializer
 
 
-@csrf_exempt
-def increment_views(request, primary_key):
-    """
-    Args:
-        request:
-        primary_key:
-    Returns:
-        response: JSON
-    """
-    if request.method == 'PATCH':
+class WallpaperApiView(APIView):
+    """Increase and decrease wallpaper's like value"""
+    permission_classes = (AllowAny,)
+    serializer_class = WallpaperSerializer
+
+    def get_object(self, primary_key):
+        """Returns wallpaper object or raises an error"""
         try:
-            wallpaper = Wallpaper.objects.get(id=primary_key)
-            wallpaper.views += 1
-            wallpaper.save()
-            return JsonResponse(
-                status=200, data={'status': 'true', 'message': 'success'})
+            return Wallpaper.objects.get(pk=primary_key)
         except ObjectDoesNotExist:
+            raise Http404
+
+    def patch(self, request, pk, *args, **kwargs):
+        """Increments or decrements wallpaper's likes value"""
+        wallpaper_object = self.get_object(pk)
+        options = ('inc-likes', 'dec-likes', 'inc-views')
+        option = request.data.get('option', None)
+
+        if not option or option not in options:
             return JsonResponse(
-                status=404,
-                data={'status': 'false', 'message': 'wallpaper with given id not found'}
+                status=422,
+                data={
+                    'status': 'false',
+                    'message': 'option value incorrect'
+                }
             )
-    return JsonResponse(
-        status=405, data={'status': 'false', 'message': 'method not allowed'})
+        if option == 'inc-likes':
+            wallpaper_object.likes += 1
+        elif option == 'dec-likes':
+            wallpaper_object.likes -= 1
+        else:
+            wallpaper_object.views += 1
 
-
-@csrf_exempt
-def inc_dec_likes(request, primary_key, value):
-    """
-    Args:
-        request:
-        primary_key:
-        value:
-    Returns:
-        response: JSON
-    """
-    if request.method == 'PATCH':
-        wallpaper = Wallpaper.objects.get(id=primary_key)
-        if value == 'increase':
-            wallpaper.likes += 1
-        elif value == 'decrease':
-            wallpaper.likes -= 1
-        wallpaper.save()
-        return HttpResponse('success', status=status.HTTP_200_OK)
-    return JsonResponse(
-        status=405, data={'status': 'false', 'message': 'method not allowed'})
+        wallpaper_object.save()
+        serializer = WallpaperSerializer(wallpaper_object)
+        return Response(serializer.data)
