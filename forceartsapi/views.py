@@ -117,6 +117,23 @@ class WallpaperApiView(APIView):
         serializer = WallpaperSerializer(wallpaper)
         return Response(serializer.data)
 
+    def post(self, request):
+        """Creates a new wallpaper"""
+        serializer = WallpaperSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, primary_key):
+        """Updates an existing wallpaper"""
+        wallpaper = self.get_object(primary_key)
+        serializer = WallpaperSerializer(wallpaper, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, primary_key):
         """Deletes wallpaper object"""
         wallpaper = self.get_object(primary_key)
