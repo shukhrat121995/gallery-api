@@ -108,8 +108,8 @@ class WallpaperApiView(APIView):
         """Returns wallpaper object or raise an error"""
         try:
             return Wallpaper.objects.get(pk=primary_key)
-        except Wallpaper.DoesNotExist:
-            raise Http404
+        except Wallpaper.DoesNotExist as wallpaper_not_exist:
+            raise Http404 from wallpaper_not_exist
 
     def get(self, request, primary_key):
         """Returns wallpaper's data"""
