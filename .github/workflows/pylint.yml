@@ -25,4 +25,4 @@ jobs:
         pip install pylint-django
     - name: Analysing the code with pylint
       run: |
-        pylint --disable=E1101 $(git ls-files '*.py')
+        pylint --disable=E1101,R0201 $(git ls-files '*.py')
