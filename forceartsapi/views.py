@@ -1,7 +1,7 @@
 """Application views module"""
 from django.http import JsonResponse, Http404
 from django.db.models import Q
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -112,14 +112,20 @@ class WallpaperApiView(APIView):
             raise Http404
 
     def get(self, request, primary_key):
-        """Returns a wallpaper's data"""
-        wallpaper_object = self.get_object(primary_key)
-        serializer = WallpaperSerializer(wallpaper_object)
+        """Returns wallpaper's data"""
+        wallpaper = self.get_object(primary_key)
+        serializer = WallpaperSerializer(wallpaper)
         return Response(serializer.data)
+
+    def delete(self, request, primary_key):
+        """Deletes wallpaper object"""
+        wallpaper = self.get_object(primary_key)
+        wallpaper.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
     def patch(self, request, primary_key):
         """Increments or decrements wallpaper's likes value"""
-        wallpaper_object = self.get_object(primary_key)
+        wallpaper = self.get_object(primary_key)
         options = ('inc-likes', 'dec-likes', 'inc-views')
         option = request.data.get('option', None)
 
@@ -131,21 +137,13 @@ class WallpaperApiView(APIView):
                     'message': 'option value incorrect'
                 }
             )
-        if not wallpaper_object:
-            return JsonResponse(
-                status=404,
-                data={
-                    'status': 'false',
-                    'message': 'wallpaper with given id not found'
-                }
-            )
         if option == 'inc-likes':
-            wallpaper_object.likes += 1
+            wallpaper.likes += 1
         elif option == 'dec-likes':
-            wallpaper_object.likes -= 1
+            wallpaper.likes -= 1
         else:
-            wallpaper_object.views += 1
+            wallpaper.views += 1
 
-        wallpaper_object.save()
-        serializer = WallpaperSerializer(wallpaper_object)
+        wallpaper.save()
+        serializer = WallpaperSerializer(wallpaper)
         return Response(serializer.data)
