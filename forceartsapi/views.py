@@ -1,5 +1,5 @@
 """Application views module"""
-from django.http import JsonResponse, Http404
+from django.http import JsonResponse
 from django.db.models import Q
 from rest_framework import generics
 from rest_framework.views import APIView
