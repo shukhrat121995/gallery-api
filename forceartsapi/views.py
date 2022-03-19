@@ -2,10 +2,11 @@
 from django.http import JsonResponse, Http404
 from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
-from rest_framework import generics, status
+from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from .generic import get_or_none
 from .models import Wallpaper, Category, ContactUs
 from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
 
@@ -105,16 +106,9 @@ class WallpaperApiView(APIView):
     permission_classes = (AllowAny,)
     serializer_class = WallpaperSerializer
 
-    def get_object(self, primary_key):
-        """Returns wallpaper object or raises an error"""
-        try:
-            return Wallpaper.objects.get(pk=primary_key)
-        except ObjectDoesNotExist:
-            raise Http404
-
-    def patch(self, request, pk, *args, **kwargs):
+    def patch(self, request, primary_key):
         """Increments or decrements wallpaper's likes value"""
-        wallpaper_object = self.get_object(pk)
+        wallpaper_object = get_or_none(Wallpaper, pk=primary_key)
         options = ('inc-likes', 'dec-likes', 'inc-views')
         option = request.data.get('option', None)
 
@@ -124,6 +118,14 @@ class WallpaperApiView(APIView):
                 data={
                     'status': 'false',
                     'message': 'option value incorrect'
+                }
+            )
+        if not wallpaper_object:
+            return JsonResponse(
+                status=404,
+                data={
+                    'status': 'false',
+                    'message': 'wallpaper with given id not found'
                 }
             )
         if option == 'inc-likes':
