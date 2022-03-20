@@ -1,7 +1,7 @@
 """Application views module"""
 from django.http import JsonResponse, Http404
 from django.db.models import Q
-from rest_framework import generics, status
+from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -106,25 +106,25 @@ class ContactUsView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class WallpaperApiView(APIView):
+class WallpaperViewSet(viewsets.ViewSet):
     """Increase and decrease wallpaper's like value"""
     permission_classes = (AllowAny,)
     serializer_class = WallpaperSerializer
 
-    def get_object(self, primary_key):
+    def get_object(self, pk):
         """Returns wallpaper object or raise an error"""
         try:
-            return Wallpaper.objects.get(pk=primary_key)
+            return Wallpaper.objects.get(pk=pk)
         except Wallpaper.DoesNotExist as wallpaper_not_exist:
             raise Http404 from wallpaper_not_exist
 
-    def get(self, request, primary_key):
-        """Returns wallpaper's data"""
-        wallpaper = self.get_object(primary_key)
+    def retrieve(self, request, pk=None):
+        """Handle getting an object by its ID"""
+        wallpaper = self.get_object(pk)
         serializer = WallpaperSerializer(wallpaper)
         return Response(serializer.data)
 
-    def post(self, request):
+    def create(self, request):
         """Creates a new wallpaper"""
         serializer = WallpaperSerializer(data=request.data)
         if serializer.is_valid():
@@ -132,24 +132,18 @@ class WallpaperApiView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, primary_key):
-        """Updates an existing wallpaper"""
-        wallpaper = self.get_object(primary_key)
+    def update(self, request, pk=None):
+        """Handle updating an object"""
+        wallpaper = self.get_object(pk)
         serializer = WallpaperSerializer(wallpaper, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, primary_key):
-        """Deletes wallpaper object"""
-        wallpaper = self.get_object(primary_key)
-        wallpaper.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    def patch(self, request, primary_key):
-        """Increments or decrements wallpaper's likes value"""
-        wallpaper = self.get_object(primary_key)
+    def partial_update(self, request, pk=None):
+        """Handle updating part of an object"""
+        wallpaper = self.get_object(pk)
         options = ('inc-likes', 'dec-likes', 'inc-views')
         option = request.data.get('option', None)
 
@@ -171,3 +165,9 @@ class WallpaperApiView(APIView):
         wallpaper.save()
         serializer = WallpaperSerializer(wallpaper)
         return Response(serializer.data)
+
+    def destroy(self, request, pk=None):
+        """Hande removing an object"""
+        wallpaper = self.get_object(pk)
+        wallpaper.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
