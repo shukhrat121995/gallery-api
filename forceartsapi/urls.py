@@ -7,8 +7,8 @@ router = DefaultRouter()
 router.register('wallpaper', views.WallpaperViewSet, basename='wallpaper')
 
 urlpatterns = [
-    path('category', views.CategoryView.as_view()),
-    path('search', views.ReactInfiniteSearchView.as_view()),
-    path('contact-us', views.ContactUsView.as_view()),
+    path('category', views.CategoryView.as_view(), name='category'),
+    path('search', views.ReactInfiniteSearchView.as_view(), name='search'),
+    path('contact-us', views.ContactUsView.as_view(), name='contact-us'),
     path('', include(router.urls))
 ]
