@@ -26,3 +26,6 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint --disable=E1101,unused-argument,no-self-use,invalid-name $(git ls-files '*.py')
+    - name: Runs unit tests
+      run: |
+        python manage.py test
