@@ -16,6 +16,9 @@ django-taggit = "*"
 requests = "*"
 django-cleanup = "*"
 django-environ = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-django = "*"
 
 [requires]
 python_version = "3.9"
