@@ -8,7 +8,7 @@ class TestUrls(TestCase):
     def test_category_url_resolved(self):
         """Checks category url"""
         response = self.client.get(reverse('category'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_search_url_resolved(self):
         """Checks search url"""
@@ -21,7 +21,7 @@ class TestUrls(TestCase):
                 'order': 'likes'
             }
         )
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_contact_url_resolved(self):
         """Checks contact url"""
@@ -33,4 +33,4 @@ class TestUrls(TestCase):
                 'message': 'Test message',
             }
         )
-        self.assertEquals(response.status_code, 201)
+        self.assertEqual(response.status_code, 201)
