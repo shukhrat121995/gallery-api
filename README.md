@@ -26,23 +26,6 @@ sqlparse==0.4.1
 urllib3==1.26.5
 ```
 
-### Database
-Normally, you should not use sqlite database in production but for testing purposes it's more than enough. If you plan 
-to move into production consider using PostgreSQL or other SQL type databases. All you have to do is edit database 
-section settings.py file of the project. And don't forget to install pipenv install psycopg2 in order to be able to 
-connect with PostgresSQL database.
-
-Instead of using PostgreSQL you can also use SQLite database. Please change ```settings.py``` of the project to use
-SQLite database
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
-    }
-}
-```
-
 ### Setup
 
 Note: pipenv is required, you can install it by executing this command```pip install pipenv```
@@ -56,21 +39,47 @@ python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
+Note: sometimes makemigrations fails to detect application migrations
+in that case run this command ```python manage.py makemigrations forceartsapi```
+before running ```python manage.py migrate``` command.
+
+### Database
+Normally, you should not use sqlite database in production but for testing purposes it's more than enough. If you plan 
+to move into production consider using PostgreSQL or other SQL type databases. All you have to do is edit database 
+section settings.py file of the project. And don't forget to install pipenv install psycopg2 in order to be able to 
+connect with PostgresSQL database.
+
+Instead of using PostgreSQL you can also use SQLite database. Please change ```settings.py``` of the project to use
+SQLite database
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'database',
+    }
+}
+```
+
+### Seed database
+Populate the database with fixtures: 
+```
+python manage.py loaddata data.json
+```
+Optional: You could also create your own data.json file but 
+don't forget to convert data.json file to UTF-8 format: 
+```
+python -Xutf8 manage.py dumpdata > data.json
+```
 
 ### Endpoints:
 ``` 
-1. [GET] http://127.0.0.1:8000/api/characters
+1. [GET] http://127.0.0.1:8000/api/category
 2. [GET] http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
 3. [POST] http://127.0.0.1:8000/api/user/create
 4. [POST] http://127.0.0.1:8000/api/user/auth
-5. [POST, PUT, DELETE] http://127.0.0.1:8000/api/wallpaper
-6. [GET] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/views
-7. [PATCH] http://127.0.0.1:8000/api/wallpaper/likes
-
+5. [POST] http://127.0.0.1:8000/api/wallpaper/
+6. [GET] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+7. [PUT] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+8. [PATCH] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+9. [DELETE] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
 ```
-
-
-
-
-
-

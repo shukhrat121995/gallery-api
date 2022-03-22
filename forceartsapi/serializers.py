@@ -33,6 +33,7 @@ class WallpaperSerializer(serializers.ModelSerializer):
 
 class CategorySerializer(serializers.ModelSerializer):
     """This class contains category serializer"""
+
     # pylint: disable=too-few-public-methods
     class Meta:
         """Category class representation"""
@@ -43,6 +44,10 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class ContactUsSerializer(serializers.ModelSerializer):
     """This class contains contact serializer"""
+    full_name = serializers.CharField(max_length=255)
+    email = serializers.EmailField()
+    message = serializers.CharField()
+
     # pylint: disable=too-few-public-methods
     class Meta:
         """Contact class representation"""

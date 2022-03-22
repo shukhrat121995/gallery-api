@@ -15,9 +15,14 @@
 /forceartsapi/migrations/__pycache__/
 /djforcearts/__pycache__/
 /forceartsapi/__pycache__/
+/forceartsapi/tests/__pycache__/
 /pages/__pycache__/
 /pages/migrations/__pycache__/
 
 .env
 
 /media/
+
+.coverage
+
+sqlite
