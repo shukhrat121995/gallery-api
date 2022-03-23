@@ -1,15 +1,37 @@
 """Admin panel configuration file
-
 Contains category, wallpaper and contact
 """
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from django.utils.translation import gettext as _
 from imagekit.admin import AdminThumbnail
-from .models import Category, Wallpaper, ContactUs
+from .models import Category, Wallpaper, ContactUs, User
+
+
+class UserAdmin(BaseUserAdmin):
+    """Custom user admin page"""
+    ordering = ['id']
+    list_display = ['email', 'name']
+
+    fieldsets = (
+        (None, {'fields': ('email', 'password')}),
+        (_('Personal Info'), {'fields': ('name',)}),
+        (
+            _('Permissions'),
+            {'fields': ('is_active', 'is_staff', 'is_superuser')}
+        ),
+        (_('Important dates'), {'fields': ('last_login',)})
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('email', 'password1', 'password2')
+        }),
+    )
 
 
 class WallpaperInline(admin.TabularInline):
     """Helper class for WallpaperAdmin"""
-
     model = Wallpaper
     extra = 1
 
@@ -29,7 +51,6 @@ class WallpaperInline(admin.TabularInline):
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     """Displays list of categories"""
-
     list_display = ['title', 'description', 'image', 'rank']
     search_fields = ['title']
     inlines = [WallpaperInline]
@@ -39,7 +60,6 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Wallpaper)
 class WallpaperAdmin(admin.ModelAdmin):
     """Displays list of wallpapers"""
-
     list_display = [
         'id',
         'collection',
@@ -84,6 +104,8 @@ class WallpaperAdmin(admin.ModelAdmin):
 @admin.register(ContactUs)
 class ContactUsAdmin(admin.ModelAdmin):
     """Displays list of contacts"""
-
     list_display = ['full_name', 'email', 'message']
     list_per_page = 50
+
+
+admin.site.register(User, UserAdmin)
