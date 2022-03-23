@@ -9,6 +9,7 @@ from .models import Category, Wallpaper, ContactUs, User
 
 
 class UserAdmin(BaseUserAdmin):
+    """Custom user admin page"""
     ordering = ['id']
     list_display = ['email', 'name']
 
