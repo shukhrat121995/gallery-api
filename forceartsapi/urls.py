@@ -10,5 +10,6 @@ urlpatterns = [
     path('category', views.CategoryView.as_view(), name='category'),
     path('search', views.ReactInfiniteSearchView.as_view(), name='search'),
     path('contact-us', views.ContactUsView.as_view(), name='contact-us'),
+    path('user/', include('user.urls')),
     path('', include(router.urls))
 ]
