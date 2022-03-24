@@ -9,12 +9,14 @@ CREATE_USER_URL = reverse('user:create')
 
 
 def create_user(**kwargs):
+    """Creates a user with given parameters"""
     return get_user_model().objects.create_user(**kwargs)
 
 
 class PublicUserApiTests(TestCase):
     """Test the users API (public)"""
     def setUp(self) -> None:
+        """Initialization"""
         self.client = APIClient()
 
     def test_create_valid_user_success(self):
