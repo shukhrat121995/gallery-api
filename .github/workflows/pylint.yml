@@ -26,3 +26,4 @@ jobs:
     - name: Analysing the code with pylint
       run: |
         pylint --disable=E1101,unused-argument,no-self-use,invalid-name,too-few-public-methods,abstract-method $(git ls-files '*.py')
+
