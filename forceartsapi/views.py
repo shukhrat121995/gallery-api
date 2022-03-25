@@ -1,12 +1,17 @@
 """Application views module"""
 from django.http import JsonResponse, Http404
 from django.db.models import Q
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import generics, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Wallpaper, Category
 from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
+
+
+CACHED_TIME_DURATION = 60*60*2
 
 
 def infinite_search(request):
@@ -118,6 +123,7 @@ class WallpaperViewSet(viewsets.ViewSet):
         except Wallpaper.DoesNotExist as wallpaper_not_exist:
             raise Http404 from wallpaper_not_exist
 
+    @method_decorator(cache_page(CACHED_TIME_DURATION))
     def retrieve(self, request, pk=None):
         """Handle getting an object by its ID"""
         wallpaper = self.get_object(pk)
