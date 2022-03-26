@@ -4,16 +4,19 @@ from .models import Wallpaper, Category, ContactUs
 
 
 class WallpaperSerializer(serializers.ModelSerializer):
-    """This class does wallpaper serializer"""
-    collection = serializers.SlugRelatedField(
-        read_only=True, slug_field='title')
+    """This class contains wallpaper serializer"""
     image = serializers.ImageField(
         max_length=None,
         use_url=True,
         allow_null=True,
-        required=False)
-    image_thumbnail = serializers.ImageField()
-    upload_time = serializers.DateTimeField(format="%d-%m-%Y")
+        required=False
+    )
+    image_thumbnail = serializers.ImageField(
+        max_length=None,
+        use_url=True,
+        allow_null=True,
+        required=False
+    )
 
     # pylint: disable=too-few-public-methods
     class Meta:
