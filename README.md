@@ -81,11 +81,14 @@ all tests inside ```tests``` folder.
 ``` 
 1. [GET] http://127.0.0.1:8000/api/category
 2. [GET] http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
-3. [POST] http://127.0.0.1:8000/api/user/create
-4. [POST] http://127.0.0.1:8000/api/user/auth
-5. [POST] http://127.0.0.1:8000/api/wallpaper/
-6. [GET] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
-7. [PUT] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
-8. [PATCH] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
-9. [DELETE] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+3. [POST] http://127.0.0.1:8000/api/user/create/
+4. [POST] http://127.0.0.1:8000/api/user/auth/
+5. [GET] http://127.0.0.1:8000/api/user/me/
+6. [PATCH] http://127.0.0.1:8000/api/user/me/
+7. [POST] http://127.0.0.1:8000/api/wallpaper/
+8. [GET] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+9. [PUT] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+10. [PATCH] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+11. [DELETE] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+12. [POST] http://127.0.0.1:8000/api/contact-us
 ```
