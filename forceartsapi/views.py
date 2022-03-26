@@ -3,15 +3,14 @@ from django.http import JsonResponse, Http404
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from rest_framework import generics, status, viewsets
+from rest_framework import generics, status, viewsets, authentication, permissions
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from .models import Wallpaper, Category
 from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
+from .permissions import CreateAndUpdateWallpaper
 
-
-CACHED_TIME_DURATION = 60*60*2
+CACHED_TIME_DURATION = 60 * 60 * 2
 
 
 def infinite_search(request):
@@ -99,7 +98,6 @@ class ReactInfiniteSearchView(generics.ListAPIView):
 
 class ContactUsView(APIView):
     """ContactUS generic API view"""
-    permission_classes = (AllowAny,)
     serializer_class = ContactUsSerializer
 
     def post(self, request):
@@ -113,8 +111,9 @@ class ContactUsView(APIView):
 
 class WallpaperViewSet(viewsets.ViewSet):
     """Increase and decrease wallpaper's like value"""
-    permission_classes = (AllowAny,)
     serializer_class = WallpaperSerializer
+    authentication_classes = (authentication.TokenAuthentication,)
+    permission_classes = [permissions.IsAuthenticated | CreateAndUpdateWallpaper]
 
     def get_object(self, pk):
         """Returns wallpaper object or raise an error"""
