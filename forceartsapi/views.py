@@ -7,7 +7,8 @@ from rest_framework import generics, status, viewsets, authentication, permissio
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Wallpaper, Category
-from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
+from .serializers import WallpaperSerializer, \
+    CreateAndUpdateWallpaperSerializer, CategorySerializer, ContactUsSerializer
 from .permissions import CreateAndUpdate
 
 CACHED_TIME_DURATION = 60 * 60 * 2
@@ -170,12 +171,16 @@ class WallpaperViewSet(viewsets.ViewSet):
     def retrieve(self, request, pk=None):
         """Handle getting an object by its ID"""
         wallpaper = self.get_object(pk)
-        serializer = WallpaperSerializer(wallpaper)
+        serializer = WallpaperSerializer(wallpaper, context={'request': request})
         return Response(serializer.data)
 
     def create(self, request):
         """Creates a new wallpaper"""
-        serializer = WallpaperSerializer(data=request.data)
+        serializer = CreateAndUpdateWallpaperSerializer(
+            data=request.data,
+            context={'request': request}
+        )
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -184,7 +189,7 @@ class WallpaperViewSet(viewsets.ViewSet):
     def update(self, request, pk=None):
         """Handle updating an object"""
         wallpaper = self.get_object(pk)
-        serializer = WallpaperSerializer(wallpaper, data=request.data)
+        serializer = CreateAndUpdateWallpaperSerializer(wallpaper, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -212,7 +217,7 @@ class WallpaperViewSet(viewsets.ViewSet):
             wallpaper.views += 1
 
         wallpaper.save()
-        serializer = WallpaperSerializer(wallpaper)
+        serializer = WallpaperSerializer(wallpaper, context={'request': request})
         return Response(serializer.data)
 
     def destroy(self, request, pk=None):
