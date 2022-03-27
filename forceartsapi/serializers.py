@@ -5,18 +5,24 @@ from .models import Wallpaper, Category, ContactUs
 
 class RelatedCategorySerializer(serializers.ModelSerializer):
     """Serializer for custom Hyperlink representation"""
+
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Category serializer representation"""
         model = Category
         fields = ['id', 'title', 'url']
+    # pylint: enable=too-few-public-methods
 
 
 class CreateAndUpdateWallpaperSerializer(serializers.ModelSerializer):
     """Only for creating and updating wallpaper"""
+
+    # pylint: disable=too-few-public-methods
     class Meta:
         """Wallpaper serializer representation"""
         model = Wallpaper
         fields = '__all__'
+    # pylint: enable=too-few-public-methods
 
 
 class WallpaperSerializer(serializers.ModelSerializer):

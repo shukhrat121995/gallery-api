@@ -25,5 +25,5 @@ jobs:
         pip install pylint-django
     - name: Analysing the code with pylint
       run: |
-        pylint --disable=E1101,unused-argument,no-self-use,invalid-name,too-few-public-methods,abstract-method,unsupported-binary-operation,too-few-public-methods $(git ls-files '*.py')
+        pylint --disable=E1101,unused-argument,no-self-use,invalid-name,too-few-public-methods,abstract-method,unsupported-binary-operation $(git ls-files '*.py')
 
