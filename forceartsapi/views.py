@@ -11,6 +11,7 @@ from .serializers import WallpaperSerializer, \
     CreateAndUpdateWallpaperSerializer, CategorySerializer, ContactUsSerializer
 from .permissions import CreateAndUpdate
 
+
 CACHED_TIME_DURATION = 60 * 60 * 2
 
 

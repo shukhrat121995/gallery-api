@@ -27,6 +27,7 @@ class CreateAndUpdateWallpaperSerializer(serializers.ModelSerializer):
 
 class WallpaperSerializer(serializers.ModelSerializer):
     """This class contains wallpaper serializer"""
+
     collection = RelatedCategorySerializer(required=False)
     image = serializers.ImageField(
         max_length=None,
