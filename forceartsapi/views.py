@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from .models import Wallpaper, Category
 from .serializers import WallpaperSerializer, CategorySerializer, ContactUsSerializer
-from .permissions import CreateAndUpdateWallpaper
+from .permissions import CreateAndUpdate
 
 CACHED_TIME_DURATION = 60 * 60 * 2
 
@@ -113,7 +113,7 @@ class WallpaperViewSet(viewsets.ViewSet):
     """Increase and decrease wallpaper's like value"""
     serializer_class = WallpaperSerializer
     authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = [permissions.IsAuthenticated | CreateAndUpdateWallpaper]
+    permission_classes = [permissions.IsAuthenticated | CreateAndUpdate]
 
     def get_object(self, pk):
         """Returns wallpaper object or raise an error"""
