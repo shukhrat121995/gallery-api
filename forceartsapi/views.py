@@ -189,7 +189,11 @@ class WallpaperViewSet(viewsets.ViewSet):
     def update(self, request, pk=None):
         """Handle updating an object"""
         wallpaper = self.get_object(pk)
-        serializer = CreateAndUpdateWallpaperSerializer(wallpaper, data=request.data, context={'request': request})
+        serializer = CreateAndUpdateWallpaperSerializer(
+            wallpaper,
+            data=request.data,
+            context={'request': request}
+        )
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
