@@ -80,15 +80,18 @@ all tests inside ```tests``` folder.
 ### Endpoints:
 ``` 
 1. [GET] http://127.0.0.1:8000/api/category
-2. [GET] http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
-3. [POST] http://127.0.0.1:8000/api/user/create/
-4. [POST] http://127.0.0.1:8000/api/user/auth/
-5. [GET] http://127.0.0.1:8000/api/user/me/
-6. [PATCH] http://127.0.0.1:8000/api/user/me/
-7. [POST] http://127.0.0.1:8000/api/wallpaper/
-8. [GET] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
-9. [PUT] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
-10. [PATCH] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
-11. [DELETE] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
-12. [POST] http://127.0.0.1:8000/api/contact-us
+2. [GET] http://127.0.0.1:8000/api/category/<category_id>
+3. [POST] http://127.0.0.1:8000/api/category/
+4. [PUT] http://127.0.0.1:8000/api/category/<category_id>
+5. [GET] http://127.0.0.1:8000/api/search?limit=20&offset=0&query=&order=likes
+6. [POST] http://127.0.0.1:8000/api/user/create/
+7. [POST] http://127.0.0.1:8000/api/user/auth/
+8. [GET] http://127.0.0.1:8000/api/user/me/
+9. [PATCH] http://127.0.0.1:8000/api/user/me/
+10. [POST] http://127.0.0.1:8000/api/wallpaper/
+11. [GET] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+12. [PUT] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+13. [PATCH] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+14. [DELETE] http://127.0.0.1:8000/api/wallpaper/<wallpaper_id>/
+15. [POST] http://127.0.0.1:8000/api/contact-us
 ```

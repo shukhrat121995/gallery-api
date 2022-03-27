@@ -3,8 +3,32 @@ from rest_framework import serializers
 from .models import Wallpaper, Category, ContactUs
 
 
+class RelatedCategorySerializer(serializers.ModelSerializer):
+    """Serializer for custom Hyperlink representation"""
+
+    # pylint: disable=too-few-public-methods
+    class Meta:
+        """Category serializer representation"""
+        model = Category
+        fields = ['id', 'title', 'url']
+    # pylint: enable=too-few-public-methods
+
+
+class CreateAndUpdateWallpaperSerializer(serializers.ModelSerializer):
+    """Only for creating and updating wallpaper"""
+
+    # pylint: disable=too-few-public-methods
+    class Meta:
+        """Wallpaper serializer representation"""
+        model = Wallpaper
+        fields = '__all__'
+    # pylint: enable=too-few-public-methods
+
+
 class WallpaperSerializer(serializers.ModelSerializer):
     """This class contains wallpaper serializer"""
+
+    collection = RelatedCategorySerializer(required=False)
     image = serializers.ImageField(
         max_length=None,
         use_url=True,
@@ -30,7 +54,8 @@ class WallpaperSerializer(serializers.ModelSerializer):
             'image_thumbnail',
             'upload_time',
             'views',
-            'likes']
+            'likes'
+        ]
     # pylint: enable=too-few-public-methods
 
 
